@@ -13,6 +13,8 @@ export default function Home() {
       <div className="bg-slate-100 p-2">
         <h1 className="text-lg font-bold">NextShop</h1>
         <p>jinbinson</p>
+        <p>-TailwindCss</p>
+        <p>-MongDB</p>
       </div>
     </div>
   );
