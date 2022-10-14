@@ -1,11 +1,14 @@
+import Cookies from "js-cookie";
 import React from "react";
 import { createContext, useReducer } from "react";
 
 export const Store = createContext();
 
 const initialState = {
-  cart: { cartItems: [] },
-};
+  cart: Cookies.get("cart")
+    ? JSON.parse(Cookies.get("cart"))
+    : { cartItems: [] },
+}; //쿠키에 있는값을 읽어서 저장하고 없으면 초기값 0으로
 
 function reducer(state, action) {
   switch (action.type) {
@@ -19,6 +22,9 @@ function reducer(state, action) {
             item.name === existItem.name ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
+
+      Cookies.set("cart", JSON.stringify({ ...state.cart, cartItems }));
+      //카트정보만 카트이름을 여기다가 저장 스트링으로 저장
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }

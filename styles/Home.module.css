@@ -108,6 +108,12 @@
   margin-left: 0.5rem;
 }
 
+.frofile {
+  height: 80%;
+  width: 80%;
+  background-color: aqua;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
