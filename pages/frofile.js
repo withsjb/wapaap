@@ -9,15 +9,15 @@ export default function frofile() {
         <div className={styles.imgbox}>
           <img className="img" src="images/par1.jpg"></img>
         </div>
-        <br></br>
+        <br />
         <h1>91812505</h1>
-        <br></br>
+        <br />
         <h1>정보보안학과</h1>
-        <br></br>
+        <br />
         <h1>3학년</h1>
-        <br></br>
+        <br />
         <h1>손진빈</h1>
-        <br></br>
+        <br />
         <button className={styles.btn}>nextshop 보러가기</button>
       </div>
       <div className={styles.write}>
@@ -33,13 +33,13 @@ export default function frofile() {
             <img className="img" src="images/cssimg.png"></img>
           </div>
         </div>
-        <br></br>
+        <br />
         <p>
           ------------------------------------------------------------------------------------------------------------------------
         </p>
         <div className={styles.aboutme}>
           <h1 className={styles.title}>자기 소개</h1>
-          <br></br>
+          <br />
           <p className={styles.fontt}>
             안녕하세요 저는 정보보안학과를 재학중인 18학번 3학년 손진빈이라고
             합니다. 현재 프론트 엔드 개발자를 지망하고 이에 대해 꿈을 키워나가고
@@ -101,8 +101,8 @@ export default function frofile() {
             불편한점을 개선하는 목적으로 기존 ui의 개선이나 새로운 기능(별점및
             강의평가기능과 호버기능을 이용한 간편정리등)들을 추가하였다.
           </p>
-          <br></br>
-          <br> </br>
+          <br />
+          <br />
           <div className={styles.projectb}>
             <img className="img" src="images/jbu.jpg"></img>
           </div>
