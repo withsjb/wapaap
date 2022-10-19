@@ -7,7 +7,7 @@ import { Store } from "../../utils/Store";
 
 export default function ProductScreen() {
   const { state, dispatch } = useContext(Store);
-  const router = useRouter();
+  //const router = useRouter();
   const { query } = router;
   const { slug } = query;
   const product = data.products.find((x) => x.slug === slug);
