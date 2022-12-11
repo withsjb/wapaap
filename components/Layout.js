@@ -1,14 +1,13 @@
-import Head from "next/head";
-import Link from "next/link";
-import { React, useContext, useEffect, useState } from "react";
-import { Store } from "../utils/Store";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react";
-import { Menu } from "@headlessui/react";
-import DropdownLink from "./DropdownLink";
-import Cookies from "js-cookie";
+import Head from 'next/head';
+import Link from 'next/link';
+import { React, useContext, useEffect, useState } from 'react';
+import { Store } from '../utils/Store';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { signOut, useSession } from 'next-auth/react';
+import { Menu } from '@headlessui/react';
+import DropdownLink from './DropdownLink';
+import Cookies from 'js-cookie';
 
 export default function Layout({ title, children }) {
   const { status, data: session } = useSession();
@@ -18,17 +17,16 @@ export default function Layout({ title, children }) {
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
   }, [cart.cartItems]);
-  /*변수로 지정 0은 초기값 USEEFFECT에서 바꿀것 위에 const로 지정된 함수들은 바꿀수없어서 밑에 usestate를 사용해서 숫자를 바꾸는것 itemcount는 숫자가 바껴야되기때문 cartItemsCount 이부분은 바뀔수없기에 뒤에 set으로 하나 더 선언해서 저걸로 바꾸는듯*/
   const logoutClickHandler = () => {
-    Cookies.remove("cart");
-    dispatch({ type: "CART_RESET" });
-    signOut({ callbackUrl: "/login" });
+    Cookies.remove('cart');
+    dispatch({ type: 'CART_RESET' });
+    signOut({ callbackUrl: '/login' });
   };
 
   return (
     <>
       <Head>
-        <title>{title ? title + " - NextShop" : "NextShop"}</title>
+        <title>{title ? title + ' - NextShop' : 'NextShop'}</title>
         <meta name="description" content="Nextjs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -42,12 +40,11 @@ export default function Layout({ title, children }) {
               <a className="text-lg font-bold">NextShop</a>
             </Link>
             <div>
+              <Link href="/MyProfile">
+                <a className="p-2">MyProfile</a>
+              </Link>
               <Link href="/crypto">
                 <a className="p-2">Crypto</a>
-              </Link>
-
-              <Link href="/profile">
-                <a className="p-2">Profile</a>
               </Link>
               <Link href="/cart">
                 <a className="p-2">
@@ -59,14 +56,14 @@ export default function Layout({ title, children }) {
                   )}
                 </a>
               </Link>
-              {status === "loading" ? (
-                "Loading"
+              {status === 'loading' ? (
+                'Loading'
               ) : session?.user ? (
                 <Menu as="div" className="relative inline-block">
                   <Menu.Button className="text-blue-600">
                     {session.user.name}
                   </Menu.Button>
-                  <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white  shadow-lg ">
+                  <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white shadow-lg ">
                     <Menu.Item>
                       <DropdownLink className="dropdown-link" href="/profile">
                         Profile
