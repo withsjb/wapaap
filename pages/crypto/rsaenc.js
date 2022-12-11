@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Layout from "../../components/Layout";
-import Image from "next/image";
-import rsakeyPic from "../../public/rsa-key.jpg";
-import rsaencPic from "../../public/rsa-enc.jpg";
-import forge from "node-forge";
+import React, { useState } from 'react';
+import Layout from '../../components/Layout';
+import Image from 'next/image';
+import rsakeyPic from '../../public/rsa-key.jpg';
+import rsaencPic from '../../public/rsa-enc.jpg';
+import forge from 'node-forge';
 
 const rsa = forge.pki.rsa;
 const pki = forge.pki;
@@ -12,20 +12,20 @@ export default function RSAEncScreen() {
   const lengths = [1024, 2048, 3072];
 
   const [keyLength, setKeyLength] = useState(1024);
-  const [publicKey, setPublicKey] = useState("");
-  const [publicKeyPem, setPublicKeyPem] = useState("");
-  const [privateKey, setPrivateKey] = useState("");
-  const [privateKeyPem, setPrivateKeyPem] = useState("");
+  const [publicKey, setPublicKey] = useState('');
+  const [publicKeyPem, setPublicKeyPem] = useState('');
+  const [privateKey, setPrivateKey] = useState('');
+  const [privateKeyPem, setPrivateKeyPem] = useState('');
   const [n, setN] = useState();
   const [p, setP] = useState();
   const [q, setQ] = useState();
   const [e, setE] = useState();
   const [d, setD] = useState();
 
-  const [plaintext, setPlaintext] = useState("Hello world - 헬로월드");
-  const [ciphertext, setCiphertext] = useState("");
-  const [ciphertextHex, setCiphertextHex] = useState("");
-  const [recoveredtext, setRecoveredtext] = useState("");
+  const [plaintext, setPlaintext] = useState('Hello world - 헬로월드');
+  const [ciphertext, setCiphertext] = useState('');
+  const [ciphertextHex, setCiphertextHex] = useState('');
+  const [recoveredtext, setRecoveredtext] = useState('');
 
   const keyGen = () => {
     const keypair = rsa.generateKeyPair({ bits: keyLength, e: 0x10001 });

@@ -1,42 +1,42 @@
-import React, { useState } from "react";
-import Layout from "../../components/Layout";
-import axios from "axios";
-import { useSession } from "next-auth/react";
-import Cookies from "js-cookie";
+import React, { useState } from 'react';
+import Layout from '../../components/Layout';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import Cookies from 'js-cookie';
 
 export default function JwtStorageScreen() {
   const { data: session } = useSession();
   const userEmail = session?.user.email;
 
   const [username, setUsername] = useState(userEmail);
-  const [jwtLocal, setJwtLocal] = useState("");
-  const [jwtSession, setJwtSession] = useState("");
-  const [jwtCookie, setJwtCookie] = useState("");
+  const [jwtLocal, setJwtLocal] = useState('');
+  const [jwtSession, setJwtSession] = useState('');
+  const [jwtCookie, setJwtCookie] = useState('');
 
   const genJwt = async () => {
-    await axios.post("/api/crypto/jwt-storage", { username }).then((res) => {
+    await axios.post('/api/crypto/jwt-storage', { username }).then((res) => {
       const token = res.data.token;
 
       // 로컬스토리지에 저장
-      localStorage.setItem("jwt", token);
+      localStorage.setItem('jwt', token);
       // 세션스토리지에 저장
-      sessionStorage.setItem("jwt", token);
+      sessionStorage.setItem('jwt', token);
       // 쿠키에 저장
-      Cookies.set("jwt", token);
+      Cookies.set('jwt', token);
 
-      console.log("Local storage: " + localStorage.getItem("jwt"));
-      console.log("Session storage: " + sessionStorage.getItem("jwt"));
-      console.log("Cookie: " + Cookies.get("jwt"));
+      console.log('Local storage: ' + localStorage.getItem('jwt'));
+      console.log('Session storage: ' + sessionStorage.getItem('jwt'));
+      console.log('Cookie: ' + Cookies.get('jwt'));
 
       // HttpOnly 쿠키는 클라이언트에서 읽을 수 없음
-      console.log("Secure Cookie: " + Cookies.get("sToken"));
+      console.log('Secure Cookie: ' + Cookies.get('sToken'));
 
       // 로컬스토리지에서 읽어옴
-      setJwtLocal(localStorage.getItem("jwt"));
+      setJwtLocal(localStorage.getItem('jwt'));
       // 세션스토리지에서 읽어옴
-      setJwtSession(sessionStorage.getItem("jwt"));
+      setJwtSession(sessionStorage.getItem('jwt'));
       // 쿠키에서 읽어옴
-      setJwtCookie(Cookies.get("jwt"));
+      setJwtCookie(Cookies.get('jwt'));
     });
   };
 

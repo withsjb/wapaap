@@ -1,43 +1,32 @@
-import forge from "node-forge";
-export default function handler(req, res) {
-  const algorithm = req.body.algorithm;
-  const inputText = req.body.inputText;
-  let hashValue;
-  switch (algorithm) {
-    case "md5":
-      // eslint-disable-next-line no-case-declarations
-      let md1 = forge.md.md5.create();
-      md1.update(inputText);
-      hashValue = md1.digest().toHex();
-      res.status(200).json({ hashValue });
-      return;
-    case "sha1":
-      // eslint-disable-next-line no-case-declarations
-      let md2 = forge.md.sha1.create();
-      md2.update(inputText);
-      hashValue = md2.digest().toHex();
-      res.status(200).json({ hashValue });
-      return;
-    case "sha256":
-      // eslint-disable-next-line no-case-declarations
-      let md3 = forge.md.sha256.create();
-      md3.update(inputText);
-      hashValue = md3.digest().toHex();
-      res.status(200).json({ hashValue });
-      return;
-    case "sha384":
-      // eslint-disable-next-line no-case-declarations
-      let md4 = forge.md.sha384.create();
-      md4.update(inputText);
-      hashValue = md4.digest().toHex();
-      res.status(200).json({ hashValue });
-      return;
-    case "sha512":
-      // eslint-disable-next-line no-case-declarations
-      let md5 = forge.md.sha512.create();
-      md5.update(inputText);
-      hashValue = md5.digest().toHex();
-      res.status(200).json({ hashValue });
-      return;
+import { getSession } from 'next-auth/react'
+import CryptoLog from '../../../models/CryptoLog'
+import { computeHash } from '../../../utils/crypto-function'
+import db from '../../../utils/db'
+
+export default async function handler(req, res) {
+  const { algorithm, inputText } = req.body
+  let hashValue = computeHash(algorithm, inputText)
+
+  const session = await getSession({ req })
+  if (!session) {
+    return res.status(401).send({ message: 'signin required' })
   }
+  const { user } = session
+  const email = user.email
+
+  const requestString = JSON.stringify(req.body)
+  const resultString = JSON.stringify({ hashValue })
+
+  const newCryptoLog = new CryptoLog({
+    email,
+    service: 'Hash',
+    request: requestString,
+    result: resultString,
+  })
+
+  await db.connect()
+  await newCryptoLog.save()
+  await db.disconnect()
+
+  res.status(200).json({ hashValue })
 }
