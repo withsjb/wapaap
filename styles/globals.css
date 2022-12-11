@@ -18,6 +18,9 @@ a {
 * {
   box-sizing: border-box;
 }
+.button-link {
+  @apply bg-yellow-400 hover:bg-yellow-500   p-2 m-2 rounded-md mb-4 text-center;
+}
 
 .card {
   @apply mb-5 block rounded-lg border border-gray-200  shadow-md;
