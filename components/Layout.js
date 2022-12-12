@@ -1,13 +1,13 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import { React, useContext, useEffect, useState } from 'react';
-import { Store } from '../utils/Store';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { signOut, useSession } from 'next-auth/react';
-import { Menu } from '@headlessui/react';
-import DropdownLink from './DropdownLink';
-import Cookies from 'js-cookie';
+import Head from "next/head";
+import Link from "next/link";
+import { React, useContext, useEffect, useState } from "react";
+import { Store } from "../utils/Store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { signOut, useSession } from "next-auth/react";
+import { Menu } from "@headlessui/react";
+import DropdownLink from "./DropdownLink";
+import Cookies from "js-cookie";
 
 export default function Layout({ title, children }) {
   const { status, data: session } = useSession();
@@ -18,15 +18,15 @@ export default function Layout({ title, children }) {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
   }, [cart.cartItems]);
   const logoutClickHandler = () => {
-    Cookies.remove('cart');
-    dispatch({ type: 'CART_RESET' });
-    signOut({ callbackUrl: '/login' });
+    Cookies.remove("cart");
+    dispatch({ type: "CART_RESET" });
+    signOut({ callbackUrl: "/login" });
   };
 
   return (
     <>
       <Head>
-        <title>{title ? title + ' - NextShop' : 'NextShop'}</title>
+        <title>{title ? title + " - NextShop" : "NextShop"}</title>
         <meta name="description" content="Nextjs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -40,8 +40,8 @@ export default function Layout({ title, children }) {
               <a className="text-lg font-bold">NextShop</a>
             </Link>
             <div>
-              <Link href="/MyProfile">
-                <a className="p-2">MyProfile</a>
+              <Link href="/fofile">
+                <a className="p-2">Profile</a>
               </Link>
               <Link href="/crypto">
                 <a className="p-2">Crypto</a>
@@ -56,8 +56,8 @@ export default function Layout({ title, children }) {
                   )}
                 </a>
               </Link>
-              {status === 'loading' ? (
-                'Loading'
+              {status === "loading" ? (
+                "Loading"
               ) : session?.user ? (
                 <Menu as="div" className="relative inline-block">
                   <Menu.Button className="text-blue-600">

@@ -31,7 +31,7 @@ export default function frofile() {
           <img className="img" src="images/mail.jpg"></img>
         </div>
         withsjb1@gmail.com
-        <Link href="/nextshopmain">
+        <Link href="/">
           <h1 className={styles.btn}> nextshop 보러가기</h1>
         </Link>
       </div>
